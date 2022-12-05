@@ -7,10 +7,13 @@ length = 50
 depth = 28
 width = 25
 
-v = (length*width)*depth
+v = (length*width)
+
+
 
 dt = 1
 nsteps = 20
+
 
 x_measured = [1,2,3,4,5,6,7]
 y_measured = [97.14, 187.82, 278, 382.88, 466.56, 560.2, 659.41]
