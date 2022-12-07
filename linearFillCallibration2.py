@@ -3,12 +3,13 @@ import time
 from ezGraph import *
 from rStats import *
 
-length = 50
-depth = 28
-width = 25
+l = 50
+h = 28
+w = 25
 
-v = (length*width)
+v = (l*w*h)
 
+h = v/(w*h)
 
 
 dt = 1

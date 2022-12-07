@@ -9,10 +9,10 @@ from rStats import *
 dt = 1
 nsteps = 30
 
-r = 2.25 #radius (cm)
-Qin = 30 # Volume inflow rate: (dv/dt) (cubic cm / s)
-h = 0        #initial hight (cm)
-k = 0.0      #outflow rate constant
+l = 25
+w = 50 
+Qin = 30       
+k = 0.0      
 
 #Experimental Data
 x_measured = [1,7,12,17,22,26]
