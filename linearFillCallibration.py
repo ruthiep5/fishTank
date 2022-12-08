@@ -3,21 +3,22 @@ import time
 from ezGraph import *
 from rStats import *
 
-# Difference Model
 
 #Parameters
 dt = 1
-nsteps = 30
+nsteps = 1320
 
+h = 0
 l = 25
 w = 50 
-Qin = 30       
-k = 0.0      
+Qin = 13.5      
+k = 13.5    
 
 #Experimental Data
-x_measured = [1,7,12,17,22,26]
-y_measured = [0,10,20,30,40,50]
+x_measured = [97, 188, 278, 383, 467, 560, 659]
+y_measured = [1,2,3,4,5,6,7]
 y_modeled = []
+
 
 #Graph
 graph = ezGraphMM(xmax = 100,
@@ -28,19 +29,24 @@ graph = ezGraphMM(xmax = 100,
     yLabel="Height (cm)")
 
 graph.addModeled(0,h)
-
+filling = True
 #TIME LOOP
 for t in range(nsteps):
     modelTime = t * dt
 
     #Filling
-    dh = Qin * dt / (np.pi * r **2)
-    h = h + dh
-
+    if filling:
+        dh = Qin * dt / (w * l)
+        h = h + dh
     #Draining
-    dVdt = -k * h 
-    dh = dVdt * dt / (np.pi * r**2)
-    h = h + dh
+    else: 
+        dh = Qin * dt / (w * l)
+        h = h - dh
+ 
+
+    if t > 659:
+        filling = False
+    
 
     # save height (h) calculated by the model
     #  only if the model time corresponds to one
@@ -60,14 +66,14 @@ print("h_modeled:", y_modeled)
 print(f'xavg measured =  {avg(x_measured)}')
 print(f'yavg measured =  {avg(y_measured)}')
 
-r = res(y_measured, y_modeled)
-print(f'residual = {r}')
+# r = res(y_measured, y_modeled)
+# print(f'residual = {r}')
 
 d = dsq(y_measured)
 print(f'difference = {d}')
 
-r2 = rSquared(y_measured, y_modeled)
-print(f'r squared = {r2}')
+# r2 = rSquared(y_measured, y_modeled)
+# print(f'r squared = {r2}')
 
 
 #draw graph
