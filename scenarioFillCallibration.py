@@ -12,11 +12,11 @@ h = 0
 l = 25
 w = 50 
 Qin = 13.5      
-k = 14.35  
+k = 13.5    
 
 #Experimental Data
-x_measured = [97, 188, 278, 383, 467, 560, 659, 748, 836, 923, 1008, 1099, 1189]
-y_measured = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1]
+x_measured = [97, 188, 278, 383, 467, 560, 659]
+y_measured = [1,2,3,4,5,6,7]
 y_modeled = []
 
 
@@ -40,14 +40,19 @@ for t in range(nsteps):
         h = h + dh
     #Draining
     else: 
-        dh = k * dt / (w * l)
+        dh = Qin * dt / (w * l)
         h = h - dh
  
 
-    if t > 659:
+    if h > 5:
         filling = False
+    if h < 4:
+        filling = True
     
 
+    # save height (h) calculated by the model
+    #  only if the model time corresponds to one
+    #  of the times when a measurement was taken
     if (modelTime in x_measured):
         print(modelTime, h)
         y_modeled.append(h)
